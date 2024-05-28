@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using notfiy.Core;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace notfiy.Models
 {
@@ -34,6 +35,30 @@ namespace notfiy.Models
             return users;
         }
 
+        public User GetUserById(int idUser)
+        {
+            User user = null;
+
+            Connection.Open();
+            var command = new NpgsqlCommand("SELECT * FROM users WHERE id_users = @id", Connection);
+            command.Parameters.AddWithValue("@id",idUser);
+
+            using (var reader = command.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    user = new User 
+                    {
+                        user.IdUser = (int)reader["id_users"];
+                        user.Username = (string)reader["username"];
+                        user.Password = (string)reader["password"];
+                        user.TimeCreated = (string)reader["users_time_created"];
+                        users.Add(user);
+                    }
+                }
+            }
+            return user;
+        }
 
     }
 }
