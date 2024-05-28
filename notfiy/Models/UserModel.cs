@@ -49,12 +49,12 @@ namespace notfiy.Models
                 {
                     user = new User 
                     {
-                        user.IdUser = (int)reader["id_users"];
-                        user.Username = (string)reader["username"];
-                        user.Password = (string)reader["password"];
-                        user.TimeCreated = (string)reader["users_time_created"];
-                        users.Add(user);
+                        user.IdUser = (int)reader["id_users"],
+                        user.Username = (string)reader["username"],
+                        user.Password = (string)reader["password"],
+                        user.TimeCreated = (string)reader["users_time_created"],
                     }
+                    users.Add(user)
                 }
             }
             return user;
